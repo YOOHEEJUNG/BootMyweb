@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coding404.myweb.command.ProductVO;
@@ -29,15 +30,17 @@ public class ProductController {
 	
 	
 
-	@GetMapping("/productReg")
-	public String reg() {
-		return "product/productReg";
-	}
-	
 	@GetMapping("/productList")
 	public String list(HttpSession session,
 						Model model,
 						Criteria cri) {/* HttpServletRequest request */
+		
+		/*
+		 1. 검색폼에서는 키워드, page, amount 데이터를 넘긴다
+		 2. 목록 조회 and total 동적쿼리로 변경
+		 3. 페이지네이션에 키워드, page, amount 데이터를 넘긴다
+		 */
+		
 		
 		//프로세스 
 		//admin이라고 가정(사용할 값이 현재 없기 때문에)
@@ -50,20 +53,32 @@ public class ProductController {
 		ArrayList<ProductVO> list = productService.getList(user_id, cri);
 		model.addAttribute("list", list);
 		
+		
+		
+		
 		//페이지네이션 처리
-		int total = productService.getTotal(user_id);
+		int total = productService.getTotal(user_id, cri);
 		PageVO pageVO = new PageVO(cri, total);
 		
 		model.addAttribute("pageVO", pageVO);
 		
-		
 		return "product/productList";
 	}
 	
+	//상세페이지로
 	@GetMapping("/productDetail")
 	public String detail() {
 		return "product/productDetail";
 	}
+	
+
+	//등록화면으로
+	@GetMapping("/productReg")
+	public String reg() {
+		return "product/productReg";
+	}
+	
+	
 	
 	//등록 버튼 누르면 넘어가는 화면 
 	@PostMapping("/registForm")
@@ -78,4 +93,15 @@ public class ProductController {
 		return "redirect:/product/productList"; //목록화면으로
 		
 	}
+	
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @GetMapping("/xxx") public String xxx() {
+	 * 
+	 * return "경로"; }
+	 */
+	
+	
 }

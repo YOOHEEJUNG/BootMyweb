@@ -13,9 +13,9 @@ import com.coding404.myweb.util.Criteria;
 @SpringBootTest
 public class TestCode {
 
-	@Autowired
-	ProductMapper productMapper;
-	
+//	@Autowired
+//	ProductMapper productMapper;
+//	
 //	@Test
 //	public void testCode01() {
 //		for(int i = 1; i <= 300; i++) {
