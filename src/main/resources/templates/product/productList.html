@@ -108,7 +108,7 @@
 														<a href="#" class="normal_btn modalOn">이미지수정</a>
 													</td>
 													<td>[[${vo.prod_id}]]</td>
-													<td>.....</td>
+													<td>[[${vo.category_nav == null ? '없음' :vo.category_nav}]]</td>
 
 													<td>
 													<a title="상세보기(클릭)" th:href="@{productDetail(prod_id = ${vo.prod_id})}">
@@ -298,6 +298,8 @@
 </th:block>
 
 <!-- th:block으로 묶어두었기 때문에 화면에 출력하게 하려면 밖에다가 스크립트 작성해야 함 -->
+
+<!-- 모달창 --><script src="/js/modal.js"></script>
 <script th:inline="javascript">
 	var msg = JSON.parse('[[${msg}]]');
 	console.log(msg);

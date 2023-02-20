@@ -29,6 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class ProductVO {
 
 	private int prod_id;
@@ -39,7 +40,8 @@ public class ProductVO {
 	@Pattern(regexp ="[0-9]{4}-[0-9]{2}-[0-9]{2}")
 	private String prod_enddate;
 	
-	private String prod_category;
+	private String prod_category; // 카테고리
+	private String category_nav; //카테고리 조인된 결과
 	
 	@NotBlank(message = "공백일 수 없습니다")
 	private String prod_writer;

@@ -1,10 +1,12 @@
 package com.coding404.myweb.product.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.coding404.myweb.command.CategoryVO;
 import com.coding404.myweb.command.ProductVO;
 import com.coding404.myweb.util.Criteria;
 
@@ -17,5 +19,9 @@ public interface ProductMapper {
 	public int getTotal(@Param("user_id") String user_id,
 			            @Param("cri") Criteria cri);  //전체 게시글의 수
 	
+	//카테고리 대분류 처리
+	public List<CategoryVO> getCategory();
+	//카테고리 중분류, 소분류 처리
+		public List<CategoryVO> getCategoryChild(CategoryVO vo);
 	
 }
