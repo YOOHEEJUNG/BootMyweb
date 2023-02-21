@@ -1,6 +1,8 @@
 package com.coding404.myweb.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coding404.myweb.command.ProductVO;
@@ -83,9 +87,27 @@ public class ProductController {
 	//등록 버튼 누르면 넘어가는 화면 
 	@PostMapping("/registForm")
 	public String registForm(/*Valid*/ ProductVO vo,
-							RedirectAttributes ra) {
+							RedirectAttributes ra,
+							@RequestParam("file")List<MultipartFile> list) {
 		
-		int result = productService.regist(vo);
+		
+		//리스트에서 빈값은 제거
+		list = list.stream()
+				   . filter( (x) -> x.isEmpty() == false)
+				   .collect(Collectors.toList());
+		
+		//확장자가 image라면 경고문
+		for(MultipartFile file : list) {
+			if(file.getContentType().contains("image") == false) {
+				ra.addFlashAttribute("msg","png, jpg, jpeg형식만 등록 가능합니다.");
+				return "redirect:/product/productReg";
+			}
+		}
+				
+		
+		//파일 업로드 작업 => 서비스 영역에서 처리
+		//글 등록
+		int result = productService.regist(vo, list);
 		System.out.println(result);
 		String msg = result == 1 ? "정상적으로 입력되었습니다" : "등록에 실패하였습니다";
 		ra.addFlashAttribute("msg", msg);

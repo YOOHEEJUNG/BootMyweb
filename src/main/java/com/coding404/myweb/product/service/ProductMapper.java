@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.coding404.myweb.command.CategoryVO;
+import com.coding404.myweb.command.ProductUploadVO;
 import com.coding404.myweb.command.ProductVO;
 import com.coding404.myweb.util.Criteria;
 
@@ -14,6 +15,7 @@ import com.coding404.myweb.util.Criteria;
 public interface ProductMapper {
 	
 	public int regist (ProductVO vo);
+	public int registFile(ProductUploadVO vo);
 	public ArrayList<ProductVO> getList(@Param("user_id") String user_id,
 										@Param("cri") Criteria cri);  //조회(특정회원만 조회)
 	public int getTotal(@Param("user_id") String user_id,
