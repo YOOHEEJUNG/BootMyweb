@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.coding404.myweb.command.CategoryVO;
+import com.coding404.myweb.command.ProductUploadVO;
 import com.coding404.myweb.command.ProductVO;
 import com.coding404.myweb.util.Criteria;
 
@@ -23,9 +24,12 @@ public interface ProductService {
 
 	//카테고리 대분류 처리
 	public List<CategoryVO> getCategory();
+	
 	//카테고리 중분류, 소분류 처리
 	public List<CategoryVO> getCategoryChild(CategoryVO vo);
 
 
+	//이미지 데이터 조회
+	public List<ProductUploadVO> getProductImg(ProductVO vo);
 
 }

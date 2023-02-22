@@ -105,14 +105,25 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.getTotal(user_id, cri);
 	}
 
+	//카테고리 대분류
 	@Override
 	public List<CategoryVO> getCategory() {
 		return productMapper.getCategory();
 	}
 
+	//카테고리 중분류, 소분류
 	@Override
 	public List<CategoryVO> getCategoryChild(CategoryVO vo) {
 		return productMapper.getCategoryChild(vo);
 	}
 
+
+	@Override
+	public List<ProductUploadVO> getProductImg(ProductVO vo) {
+		
+		return productMapper.getProductImg(vo);
+	}
+
+
+	
 }
