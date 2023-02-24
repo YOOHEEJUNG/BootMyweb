@@ -48,7 +48,7 @@ public class ProductController {
 		
 		//프로세스 
 		//admin이라고 가정(사용할 값이 현재 없기 때문에)
-		session.setAttribute("user_id", "admin");
+		//session.setAttribute("user_id", "admin");
 		
 		//로그인한 회원만 조회
 		System.out.println(cri.toString());

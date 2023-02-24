@@ -3,8 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.coding404.myweb.product.service.ProductMapper">
+<mapper namespace="com.coding404.myweb.product.service.ProductMapper">
 
 	<!-- 오라클은 대소문자 구분 상관 없지만 Mysql은 테이블명을 구분할 수도 있어서 잘 확인해야 함 -->
 	<!-- 상품 등록 기능 -->

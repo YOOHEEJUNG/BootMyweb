@@ -133,5 +133,37 @@
 	</footer>
 	
 </body>	
+<script th:inline="javascript">
+/* 	console.log(JSON.parse('[[${uri}]]')) */
+	
+	/*
+		메뉴선택 유지 -
+		sub_menu에 display:block
+		sub_menu > a링크에 on클래스
+		sub_menu_toggle -> a에 sub_menu_select 클래스
+	*/
+	
+	//$("a[href*='" + menu +"']").addClass("on");
+	
+	var menu = JSON.parse('[[${uri}]]');
+	$(".sub_menu a").each(function(index, item){
+
+		//item // a태그 
+		//console.log(index, item)
+		//console.log($(item));
+		//console.log($(item).attr("href"));
+		
+		//href에 uri값이 들어있는지 확인
+		if($(item).attr("href").includes(menu)){
+			$(item).addClass("on"); //a태그에 on클래스 추가
+			$(item).closest(".sub_menu").css("display", "block");
+			$(item).closest(".sub_menu").prev().addClass()
+		}
+	});
+
+</script>
 </th:block>
+
+
 </html>
+
